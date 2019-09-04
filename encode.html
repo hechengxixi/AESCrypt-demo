@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>crypto</title>
+        <script src="./crypto/crypto-js.js"></script>
+	</head>
+	<body class="flat_black" style="padding:20px;">
+		<div id="page1"></div>
+		
+        
+        <script>
+			var key = CryptoJS.enc.Utf8.parse("0102030405060708");   //加密密钥
+			var iv  = CryptoJS.enc.Utf8.parse('0102030405060709');   //加密向量
+			var srcs = CryptoJS.enc.Utf8.parse("test");  
+			var encrypted = CryptoJS.AES.encrypt(srcs, key, { iv: iv,mode:CryptoJS.mode.CBC});  
+			console.log(encrypted.toString()) ;   // output: oM8yv4/bcYxXUcCqZQtR6w==
+
+
+			// Decrypt
+			var bytes  = CryptoJS.AES.decrypt(encrypted.toString(), key, { iv: iv,mode:CryptoJS.mode.CBC});
+			var plaintext = bytes.toString(CryptoJS.enc.Utf8);
+
+			console.log(plaintext);
+		</script>
+	</body>
+</html>
+
